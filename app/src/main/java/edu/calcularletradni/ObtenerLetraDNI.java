@@ -1,26 +1,36 @@
 package edu.calcularletradni;
 
 import android.os.AsyncTask;
-import android.renderscript.ScriptGroup;
+
 import android.util.Log;
-import android.webkit.HttpAuthHandler;
+
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+
 import java.net.URL;
 
 /**
  * Created by Administrador on 22/03/2017.
  */
 
- 
 
-public class ObtenerLetraDNI extends AsyncTask<String,Void,String >{
 
+public class ObtenerLetraDNI extends AsyncTask<String,Void,String > {
+
+    private MainActivity mainActivity;
     private static final String SERVLET_LETRA_DNI = "http://femxa-ebtm.rhcloud.com/CalcularLetraDni?dni=";
+
+    public ObtenerLetraDNI (MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+
+    }
+
+
+
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -63,5 +73,6 @@ public class ObtenerLetraDNI extends AsyncTask<String,Void,String >{
         super.onPostExecute(letra);
         Log.d("MENSAJE", "La invocacion al servlet acabo");
         Log.d("MENSAJE", "Letra recibida = "+ letra);
+        mainActivity.mostrarToas(letra);
     }
 }
